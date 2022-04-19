@@ -13,10 +13,10 @@ TEST_DATA_PATH = Path(__file__).parent / "data"
 def config_fixture() -> Config:
     return Config(
         data_refresh_period=None,
-        reverse_geocoding_path=TEST_DATA_PATH / "station_location.csv",
+        # reverse_geocoding_path=TEST_DATA_PATH / "station_location.csv",
         port=0,
         user_content_storage=None,
-        velib_data_base_path=TEST_DATA_PATH,
+        # velib_data_base_path=TEST_DATA_PATH,
     )
 
 

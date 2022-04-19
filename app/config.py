@@ -26,9 +26,11 @@ class Config(BaseSettings):
     # The $PORT environment variable is used by most PaaS to indicate the port the app server should bind to.
     port: int = 9090
 
-    reverse_geocoding_path: Union[HttpUrl, FilePath] = Field(
-        default="https://api-adresse.data.gouv.fr/reverse/csv/"
-    )
+    aws_s3_path = "s3://data.atoti.io/notebooks/french-presidential-election-2022/"
+
+    # reverse_geocoding_path: Union[HttpUrl, FilePath] = Field(
+    #     default="https://api-adresse.data.gouv.fr/reverse/csv/"
+    # )
 
     user_content_storage: Optional[Union[PostgresDsn, Path]] = Field(
         default=Path("content"),
@@ -37,9 +39,9 @@ class Config(BaseSettings):
         env="database_url",
     )
 
-    velib_data_base_path: Union[HttpUrl, DirectoryPath] = Field(
-        default="https://velib-metropole-opendata.smoove.pro/opendata/Velib_Metropole"
-    )
+    # velib_data_base_path: Union[HttpUrl, DirectoryPath] = Field(
+    #     default="https://velib-metropole-opendata.smoove.pro/opendata/Velib_Metropole"
+    # )
 
     @validator("user_content_storage")
     @classmethod
