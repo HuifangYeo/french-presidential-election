@@ -1,7 +1,7 @@
 {
   "name": "atoti template",
   "description": "A template for atoti projects",
-  "repository": "https://github.com/atoti/project-template#deploy-to-heroku",
+  "repository": "https://github.com/HuifangYeo/french-presidential-election",
   "keywords": ["atoti", "dataviz", "python", "visualization"],
   "addons": ["heroku-postgresql:hobby-dev"],
   "buildpacks": [
