@@ -28,8 +28,10 @@ optional = false
 python-versions = ">=3.8, !=3.9.7"
 
 [package.dependencies]
+atoti-aws = {version = "0.6.5", optional = true, markers = "extra == \"aws\""}
 atoti-core = "0.6.5"
 atoti-query = "0.6.5"
+atoti-sql = {version = "0.6.5", optional = true, markers = "extra == \"sql\""}
 jdk4py = ">=11.0,<12.0"
 numpy = ">=1.22,<2.0"
 pandas = "*"
@@ -681,7 +683,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8.0, !=3.9.7"
-content-hash = "c21401e986f77e950994ab14af61e271f59f83b79625aff2021e488940673b87"
+content-hash = "8e1fdad975939b529edf4a5441c76ca221eb2dae7d0dba92da6456c36f55721d"
 
 [metadata.files]
 astroid = [

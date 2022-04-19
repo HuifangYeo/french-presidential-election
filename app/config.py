@@ -4,10 +4,7 @@ from typing import Any, Optional, Union
 
 from pydantic import (
     BaseSettings,
-    DirectoryPath,
     Field,
-    FilePath,
-    HttpUrl,
     PostgresDsn,
     validator,
 )
@@ -28,20 +25,12 @@ class Config(BaseSettings):
 
     aws_s3_path = "s3://data.atoti.io/notebooks/french-presidential-election-2022/"
 
-    # reverse_geocoding_path: Union[HttpUrl, FilePath] = Field(
-    #     default="https://api-adresse.data.gouv.fr/reverse/csv/"
-    # )
-
     user_content_storage: Optional[Union[PostgresDsn, Path]] = Field(
         default=Path("content"),
         # $DATABASE_URL is used by some PaaS such to designate the URL of the app's primary database.
         # For instance: https://devcenter.heroku.com/articles/heroku-postgresql#designating-a-primary-database.
         env="database_url",
     )
-
-    # velib_data_base_path: Union[HttpUrl, DirectoryPath] = Field(
-    #     default="https://velib-metropole-opendata.smoove.pro/opendata/Velib_Metropole"
-    # )
 
     @validator("user_content_storage")
     @classmethod

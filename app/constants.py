@@ -81,9 +81,11 @@ class ElectionCubeMeasure(Enum):
     TOTAL_NULL_VOTES = "Total null ballots"
     TOTAL_ABSTENTIONS = "Total abstentions"
     TOTAL_INVALID_VOTES = "Total invalid votes"
+    TOTAL_TURNOUT = "Total turnout"
 
     # Percentage
     PERCENT_REG_VOTES = "% votes against reg. votes"
+    PERCENT_TURNOUT_VOTES = "% votes against turnout"
     PERCENT_VALID_VOTES = "% valid vote"
     PERCENT_BLANK_VOTES = "% blank ballots"
     PERCENT_NULL_VOTES = "% null ballots"
@@ -92,31 +94,3 @@ class ElectionCubeMeasure(Enum):
 
     WINNING_CANDIDATE = "Winning candidates"
     WINNING_VOTES = "Winning votes"
-
-
-# class ElectionCubeHierarchy(Enum):
-#     BIKE_TYPE = StationStatusTableColumn.BIKE_TYPE.value
-#     LOCATION = "Location"
-#     STATION = "Station"
-
-
-# class StationCubeBikeTypeLevel(Enum):
-#     BIKE_TYPE = StationCubeHierarchy.BIKE_TYPE.value
-
-
-# class StationCubeLocationLevel(Enum):
-#     DEPARTMENT = StationDetailsTableColumn.DEPARTMENT.value
-#     CITY = StationDetailsTableColumn.CITY.value
-#     POSTCODE = StationDetailsTableColumn.POSTCODE.value
-#     STREET = StationDetailsTableColumn.STREET.value
-#     HOUSE_NUMBER = StationDetailsTableColumn.HOUSE_NUMBER.value
-
-
-# class StationCubeStationLevel(Enum):
-#     NAME = StationDetailsTableColumn.NAME.value
-#     ID = StationDetailsTableColumn.ID.value
-
-
-# class StationCubeMeasure(Enum):
-#     CAPACITY = StationDetailsTableColumn.CAPACITY.value
-#     BIKES = StationStatusTableColumn.BIKES.value

@@ -46,11 +46,12 @@ A few examples:
   ```bash
   poetry run format --fix
   ```
+## Deploy to Heroku
 
-## Variants
+This branch shows [the modifications](https://github.com/atoti/project-template/compare/deploy-to-heroku) required to deploy a project to Heroku.
 
-This repository has the following long-lived branches showcasing different aspects:
+Click on the button below to deploy this project to Heroku:
 
-- [`atoti-plus`](https://github.com/atoti/project-template/tree/atoti-plus) for upgrading to Atoti+.
-- [`deploy-to-aws`](https://github.com/atoti/project-template/tree/deploy-to-aws) for deploying on AWS ECS.
-- [`deploy-to-heroku`](https://github.com/atoti/project-template/tree/deploy-to-heroku) for a one-click deploy to Heroku.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+_Note_: to deploy a project started from this template, remember to change the `repository` value in [app.json](app.json).

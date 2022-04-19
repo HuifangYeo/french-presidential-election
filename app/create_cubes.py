@@ -1,3 +1,4 @@
+from turtle import update
 import atoti as tt
 
 from .constants import (
@@ -36,10 +37,8 @@ def create_election_cube(session: tt.Session, /) -> None:
             StatisticsTableColumn.REGION.value,
         ]
     ]
-    print("================", m_name_stats)
 
     for m_name in m_name_stats:
-        print("--------- MEASURE NAMES:", m_name)
         m[m_name] = tt.value(
             statistics_table[m_name],
             levels=[
@@ -77,49 +76,66 @@ def create_election_cube(session: tt.Session, /) -> None:
         }
     )
 
+    # VOTES measure has to be created first before we can chain it up
     m.update(
         {
             ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value: tt.agg.sum(
                 m[ElectionCubeMeasure.VOTES.value],
                 scope=tt.scope.origin(l[ElectionCubeLevel.CANDIDATE_NAME.value]),
             ),
-            # ElectionCubeMeasure.PERCENT_REG_VOTES.value: m[
-            #     ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value
-            # ]
-            # / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
-            # ElectionCubeMeasure.PERCENT_VALID_VOTES.value: m[
-            #     ElectionCubeMeasure.TOTAL_VALID_VOTES.value
-            # ]
-            # / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
-            # ElectionCubeMeasure.PERCENT_BLANK_VOTES.value: m[
-            #     ElectionCubeMeasure.TOTAL_BLANK_VOTES.value
-            # ]
-            # / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
-            # ElectionCubeMeasure.PERCENT_NULL_VOTES.value: m[
-            #     ElectionCubeMeasure.TOTAL_NULL_VOTES.value
-            # ]
-            # / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
-            # ElectionCubeMeasure.PERCENT_ABSTENTIONS.value: m[
-            #     ElectionCubeMeasure.TOTAL_ABSTENTIONS.value
-            # ]
-            # / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
-            # ElectionCubeMeasure.TOTAL_INVALID_VOTES.value: m[
-            #     ElectionCubeMeasure.TOTAL_BLANK_VOTES.value
-            # ]
-            # + m[ElectionCubeMeasure.TOTAL_NULL_VOTES.value]
-            # + m[ElectionCubeMeasure.TOTAL_ABSTENTIONS.value],
-            # ElectionCubeMeasure.PERCENT_INVALID.value: m[
-            #     ElectionCubeMeasure.TOTAL_INVALID_VOTES.value
-            # ]
-            # / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
-            # ElectionCubeMeasure.WINNING_CANDIDATE.value: tt.agg.max_member(
-            #     m[ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value],
-            #     l[ElectionCubeLevel.CANDIDATE_NAME.value],
-            # ),
-            # ElectionCubeMeasure.WINNING_VOTES.value: tt.agg.max(
-            #     m[ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value],
-            #     scope=tt.scope.origin(l[ElectionCubeLevel.CANDIDATE_NAME.value]),
-            # ),
+            ElectionCubeMeasure.PERCENT_VALID_VOTES.value: m[
+                ElectionCubeMeasure.TOTAL_VALID_VOTES.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
+            ElectionCubeMeasure.PERCENT_BLANK_VOTES.value: m[
+                ElectionCubeMeasure.TOTAL_BLANK_VOTES.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
+            ElectionCubeMeasure.PERCENT_NULL_VOTES.value: m[
+                ElectionCubeMeasure.TOTAL_NULL_VOTES.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
+            ElectionCubeMeasure.PERCENT_ABSTENTIONS.value: m[
+                ElectionCubeMeasure.TOTAL_ABSTENTIONS.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
+            ElectionCubeMeasure.TOTAL_INVALID_VOTES.value: m[
+                ElectionCubeMeasure.TOTAL_BLANK_VOTES.value
+            ]
+            + m[ElectionCubeMeasure.TOTAL_NULL_VOTES.value]
+            + m[ElectionCubeMeasure.TOTAL_ABSTENTIONS.value],
+        }
+    )
+
+    # TOTAL_INVALID_VOTES measure  has to be created before we can chain it up
+    m.update(
+        {
+            ElectionCubeMeasure.PERCENT_INVALID.value: m[
+                ElectionCubeMeasure.TOTAL_INVALID_VOTES.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value]
+        }
+    )
+
+    # TOTAL_VOTES_DEPARTMENTS measure has to be created first before we can chain it up
+    m.update(
+        {
+            ElectionCubeMeasure.PERCENT_REG_VOTES.value: m[
+                ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_REG_VOTERS.value],
+            ElectionCubeMeasure.PERCENT_TURNOUT_VOTES.value: m[
+                ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value
+            ]
+            / m[ElectionCubeMeasure.TOTAL_TURNOUT.value],
+            ElectionCubeMeasure.WINNING_CANDIDATE.value: tt.agg.max_member(
+                m[ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value],
+                l[ElectionCubeLevel.CANDIDATE_NAME.value],
+            ),
+            ElectionCubeMeasure.WINNING_VOTES.value: tt.agg.max(
+                m[ElectionCubeMeasure.TOTAL_VOTES_DEPARTMENTS.value],
+                scope=tt.scope.origin(l[ElectionCubeLevel.CANDIDATE_NAME.value]),
+            ),
         }
     )
 
