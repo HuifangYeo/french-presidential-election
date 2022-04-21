@@ -1,4 +1,3 @@
-from turtle import update
 import atoti as tt
 
 from .constants import (
