@@ -4,9 +4,13 @@ version = "0.1.0"
 description = "French presidential election 2022"
 authors = ["atoti <contact@atoti.io>"]
 
+[[tool.poetry.source]]
+name = "atoti-plus"
+url = "https://pypi.atoti.io/simple/"
+
 [tool.poetry.dependencies]
 python = "^3.8.0, !=3.9.7"
-atoti = {extras = ["sql","aws"], version = "*"}
+atoti = {extras = ["sql","plus","aws"], version = "*"}
 # Poetry deletes this package when the --no-dev flag is enabled because it is a dependency of requests, however it is needed for package installation.
 certifi = "*"
 numpy = "*"

@@ -3,7 +3,6 @@ __pycache__/
 .mypy_cache/
 .pytest_cache/
 .venv/
-content/
 app/data/2022/google_trends/fr/hourly/interest_by_region/2021_47.csv
 app/data/2022/google_trends/fr/hourly/interest_by_region/2021_48.csv
 app/data/2022/google_trends/fr/hourly/interest_by_region/2021_49.csv

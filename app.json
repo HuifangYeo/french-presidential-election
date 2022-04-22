@@ -24,6 +24,18 @@
     "PYTHON_RUNTIME_VERSION": {
       "description": "The Python version to use (should be a pinned version compatible with the one declared in pyproject.toml).",
       "value": "3.9.9"
+    },
+    "POETRY_HTTP_BASIC_ATOTI_PLUS_USERNAME":{
+      "description": "Atoti+ username",
+      "value": ""
+    },
+    "POETRY_HTTP_BASIC_ATOTI_PLUS_PASSWORD":{
+      "description": "Atoti+ password",
+      "value": ""
+    },
+    "ACTIVEPIVOT_LICENSE":{
+      "description": "Path to Atoti+ license file or license as base64 string",
+      "value": ""
     }
   }
 }
